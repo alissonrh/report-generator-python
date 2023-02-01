@@ -7,7 +7,7 @@ class CsvImporter(Importer):
     @staticmethod
     def import_data(csv_path):
         if not csv_path.endswith(".csv"):
-            raise ValueError("Invalid file")
+            raise ValueError("Arquivo inválido")
         try:
             with open(csv_path) as csv_data:
                 reader = csv.DictReader(csv_data)

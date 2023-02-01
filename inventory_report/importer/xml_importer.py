@@ -1,12 +1,13 @@
-from ast import ImportFrom
 import xml.etree.ElementTree as ET
 
+from inventory_report.importer.importer import Importer
 
-class XmlImporter(ImportFrom):
+
+class XmlImporter(Importer):
     @staticmethod
     def import_data(xml_path):
         if not xml_path.endswith(".xml"):
-            raise ValueError("Invalid file")
+            raise ValueError("Arquivo inválido")
 
         with open(xml_path) as arquivo_xml:
             xml_tree = ET.parse(arquivo_xml)
