@@ -1,16 +1,20 @@
+from ast import ImportFrom
 import xml.etree.ElementTree as ET
 
 
-class LeitorXML:
+class XmlImporter(ImportFrom):
     @staticmethod
-    def ler(xml_path):
+    def import_data(xml_path):
+        if not xml_path.endswith(".xml"):
+            raise ValueError("Invalid file")
+
         with open(xml_path) as arquivo_xml:
             xml_tree = ET.parse(arquivo_xml)
             root = xml_tree.getroot()
-            dados = []
+            reports = []
             for child in root:
-                linha = {}
+                report_dict = {}
                 for elem in child:
-                    linha[elem.tag] = elem.text
-                dados.append(linha)
-        return dados
+                    report_dict[elem.tag] = elem.text
+                reports.append(report_dict)
+        return reports

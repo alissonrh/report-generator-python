@@ -1,10 +1,15 @@
 import csv
 
+from inventory_report.importer.importer import Importer
 
-class LeitorCSV:
+
+class CsvImporter(Importer):
     @staticmethod
-    def ler(csv_path):
-        with open(csv_path) as arquivo_csv:
-            leitor = csv.DictReader(arquivo_csv)
-            dados = [linha for linha in leitor]
-        return dados
+    def import_data(csv_path):
+        if not csv_path.endswith(".xml"):
+            raise ValueError("Invalid file")
+
+        with open(csv_path) as csv_data:
+            reader = csv.DictReader(csv_data)
+            data = [line for line in reader]
+        return data

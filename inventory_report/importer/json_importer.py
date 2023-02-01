@@ -1,9 +1,13 @@
+from ast import ImportFrom
 import json
 
 
-class LeitorJSON:
+class JsonImporter(ImportFrom):
     @staticmethod
-    def ler(json_path):
+    def import_data(json_path):
+        if not json_path.endswith(".json"):
+            raise ValueError("Invalid file")
+
         with open(json_path) as arquivo_json:
-            dados = json.load(arquivo_json)
-        return dados
+            data = json.load(arquivo_json)
+        return data
